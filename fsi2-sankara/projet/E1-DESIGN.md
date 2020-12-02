@@ -1,27 +1,8 @@
 ## Desgin
 
 # Archictecture 
-MVC peut être
 
-Client/Serveur 
-
-Client 
-pages 
-    Page d'inscription
-    Login
-    Page de gestion de vols 
-
-
-Le serveur :
-Dossier
--   models, pour la gestion de la base
--   api, Notre API destinée au client
--   loaders, Contenant les instances en singleton de notre app
--   core, 
-- config, configuration
-
-
-
+![SchemaArchi_FondBlanc_pour_md](https://user-images.githubusercontent.com/34629130/100863809-62f61d00-3495-11eb-82c7-05c1de93664b.png)
 
 # Modele de donnée stocké
 Utilisation de la librairie sqlite, librairie
