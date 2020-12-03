@@ -1,9 +1,10 @@
 const apiRoutes  = require("./api/routes")
 const app = require("express")()
+const cors = require("cors")
 const Database = require("./core/DBcore")
 
 const db = new Database()
-
+app.use(cors());
 app.use(apiRoutes())
 
 

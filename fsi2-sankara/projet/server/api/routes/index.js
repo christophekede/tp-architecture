@@ -1,6 +1,3 @@
-
-
-
 const reservation = require("./reservation")
 const user = require("./user")
 const vol = require("./vol")
