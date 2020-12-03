@@ -1,3 +1,5 @@
+const fetch = require("node-fetch")
+
 const express = require("express")
 const app = express()
 
@@ -10,6 +12,16 @@ app.get("/", (req, res)=>{
     res.status(200)
     res.sendFile(`${public}/index.html`)
     
+})
+
+app.post("/", (req, res)=>{
+    console.log(req.body)
+    res.redirect("/login")
+})
+app.get("/login", (req, res)=>{
+
+ 
+    res.json("hello")
 })
 
 

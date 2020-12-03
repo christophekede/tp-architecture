@@ -1,6 +1,8 @@
 const apiRoutes  = require("./api/routes")
 const app = require("express")()
+const Database = require("./core/DBcore")
 
+const db = new Database()
 
 app.use(apiRoutes())
 
