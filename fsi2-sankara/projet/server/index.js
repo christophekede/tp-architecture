@@ -1,4 +1,8 @@
-const app = require("express")
+const apiRoutes  = require("./api/routes")
+const app = require("express")()
+
+
+app.use(apiRoutes())
 
 
 
