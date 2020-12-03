@@ -1,0 +1,4 @@
+<h1>Hi <%= name %> <p>Your email is :</p><%= email %> <p>and your id is :<%= id %></p></h1>
+<form action="/logout?_method=DELETE" method="POST"><!--On utilisant ?_method=DELETE et le module methode-override cela permet de remlacer le post method par app.delete dans le serveur lors du clic -->
+  <button type="submit">Log Out</button>
+</form>
