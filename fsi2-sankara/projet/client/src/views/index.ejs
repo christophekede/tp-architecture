@@ -100,7 +100,7 @@
 <body>
     <div class="container">
         <div class="box1">
-            <table id="vols">
+            <table>
                 <h1>Liste de vols disponible</h1>
                 <thead>
                     <tr>
@@ -111,7 +111,7 @@
 
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="vols">
                     <% for(var i=0; i<vols.length; i++) { %>
                         <tr id="vol<%= vols[i].volId %>">
                             <td>
@@ -179,12 +179,13 @@
 
         // supprimer vol de la liste des vols disponible
         const volDelete = document.getElementById("vol" + volId)
-        volDelete.innerHTML = ""
+        volDelete.parentNode.removeChild(volDelete)
+
         console.log(volId)
         fetch("http://localhost:3000/vol/" + volId, {}).then(data => data.json()).then(volInfo => {
             console.log(volInfo)
 
-            const reservationToAdd = `<tr id="reservation${volInfo.volId}">
+            const reservationToAdd = `
                             <td>
                                 ${volInfo.codeDepart}
                             </td>
@@ -196,10 +197,11 @@
                             <td>
                                 <button onclick=annuler(${volInfo.volId})>Annuler</button>
                             </td>
-                        </tr>`
+                        `
 
 
             const tr = document.createElement("tr")
+            tr.id = "reservation" + volId
             tr.innerHTML = reservationToAdd
             document.getElementById("reservations").appendChild(tr)
         })
@@ -211,14 +213,44 @@
     }
     //annuler: 
 
-    const annuler = (volId) => {
-        fetch("/annuler", {
+    const annuler = async (volId) => {
+        await fetch("/annuler", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ volId })
         })
+
+
+
+        fetch("http://localhost:3000/vol/" + volId, {}).then(data => data.json()).then(volInfo => {
+            console.log(volInfo)
+
+            const volToAdd = `
+                            <td>
+                                ${volInfo.codeDepart}
+                            </td>
+                            <td>
+                                ${volInfo.codeDestination}
+                            </td>
+                            <td>
+                                ${volInfo.prix}
+                            <td>
+                                <button onclick=reserver(${volId})>Reserver</button>
+                            </td>
+                        `
+
+            console.log("reservation" + volId)
+            const reservationDelete = document.getElementById("reservation" + volId)
+            reservationDelete.parentNode.removeChild(reservationDelete)
+
+            const tr = document.createElement("tr")
+            tr.id = "vol" + volInfo.volId
+            tr.innerHTML = volToAdd
+            document.getElementById("vols").appendChild(tr)
+        })
+
     }
 </script>
 
