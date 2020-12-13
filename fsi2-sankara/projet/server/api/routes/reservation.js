@@ -1,4 +1,3 @@
-
 const app = require("express")()
 const DB = require("../../core/DBcore")
 
@@ -81,6 +80,20 @@ app.post("/reservation", (req, res)=>{
       });
 
 })
+//requete de annulation :
+app.post("/annulation", (req, res)=>{
+    const {volId, userId} = req.body
+    const DBinstance = new DB()
+    const db = DBinstance.getDB()
+    var stmt = db.prepare("DELETE FROM reservation where(userId = ? and volId = ?)");
+    stmt.run(userId, volId, function (err) { 
+        if (err) throw err;
+        console.log(this);
+        console.log(this.lastID);
+        res.status(200)
+        res.json(this.lastID)
+      });
+
+})
 
 module.exports = app
-

@@ -22,29 +22,21 @@ app.set('views', views)
 
 app.get("/", async (req, res)=>{
 
-  
-    const data = await fetch("http://localhost:3000/vol", {})
+    const id = req.cookies.userId
+    const data = await fetch("http://localhost:3000/vol"+id, {})
     const vols = await data.json() || []
     let reservations = []
-    reservationsId = []
-    const haveAccount = false
     
     if(req.cookies.userId){
-        
+      
         const id = req.cookies.userId
         
         const dataReservation = await fetch("http://localhost:3000/reservation/"+id, {})
-        
-      
         reservations = await dataReservation.json() 
-        reservations.forEach(element => {
-            reservationsId.push(element.volId)
-        });
-        console.log(reservationsId)
         
     }else{
         const dataId = await fetch("http://localhost:3000/user", {})
-       const userId = await dataId.json()
+        const userId = await dataId.json()
       
         res.cookie("userId", userId)
     }
@@ -53,7 +45,7 @@ app.get("/", async (req, res)=>{
 
 
     res.status(200)
-    res.render(`index`, {name:"chris", vols, reservations, reservationsId})
+    res.render(`index`, {name:"chris", vols, reservations})
     
 })
 
@@ -67,21 +59,35 @@ app.post("/reserver", (req, res)=>{
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ volId, userId:req.cookies.userId , haveAccount})
+        body: JSON.stringify({ volId, userId:req.cookies.userId })
+
+    })
+    res.status(200)
+    res.send("ok")
+})
+//annuler une réservation : 
+app.post("/annuler", (req, res)=>{
+    const {volId} = req.body
+   
+    console.log(req.body)
+
+    fetch("http://localhost:3000/annulation", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ volId, userId:req.cookies.userId })
 
     })
     res.status(200)
     res.send("ok")
 })
 
-
 app.get("/login", (req, res)=>{
 
  
     res.json("hello")
 })
-
-
 app.listen(3001, (err)=>{
     if(err)
         return console.error(err)
