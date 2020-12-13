@@ -54,6 +54,8 @@
 
         .container {
             padding: 16px;
+            display: flex;
+
         }
 
         span.psw {
@@ -76,33 +78,89 @@
 </head>
 
 <body>
+    <div class="container">
+        <table>
+            <caption>Liste de vols disponible</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Depart</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Action</th>
 
-    <h2>Hello <%=name%></h2>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i<vols.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= vols[i].codeDepart %>
+                    </td>
+                    <td>
+                        <%= vols[i].codeDestination %>
+                    </td>
+                    <td>
+                        <%= vols[i].prix %>
+                    </td>
+                    <td>
+                        <button onclick=reserver("<%= vols[i].volId %>")>Reserver</button>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
 
-    <form method="post">
-        <div class="imgcontainer">
-            <img src="img_avatar2.png" alt="Avatar" class="avatar">
-        </div>
+        </table>
 
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+        <table style="margin-left: 100px;">
+            <caption>Mes reservations</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Depart</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Action</th>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i<reservations.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= reservations[i].codeDepart %>
+                    </td>
+                    <td>
+                        <%= reservations[i].codeDestination %>
+                    </td>
+                    <td>
+                        <%= reservations[i].prix %>
+                    </td>
+                    <td>
+                        <button>Annuler</button>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
 
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
+        </table>
 
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
+    </div>
+
+
+
 
 </body>
+<script>
+
+    const reserver = (volId) => {
+        fetch("/reserver", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ volId })
+
+        })
+    }
+</script>
 
 </html>

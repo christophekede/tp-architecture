@@ -1,8 +1,15 @@
-const DB =  require("../core/DBcore")
+
+
+
+
+(async ()=>{
+    const DB =  require("../core/DBcore")
 const DBinstance = new DB()
 const db = DBinstance.getDB()
-db.exec("drop table user")
-db.exec('create table IF NOT EXISTS user(userId INTEGER PRIMARY KEY, name VARCHAR(50) NOT NULL,password VARCHAR(50) NULL)')
 
-db.exec("INSERT INTO User ( name, password) VALUES ('toto', '123456');")
-db.exec("INSERT INTO User ( name, password) VALUES ('tata', '123456');")
+await db.exec('create table user (userId INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50) NOT NULL)')
+
+await db.exec("INSERT INTO user (name) VALUES ('toto');")
+await db.exec("INSERT INTO user (name) VALUES ('tata');")
+
+})()
