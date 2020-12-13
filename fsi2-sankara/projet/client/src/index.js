@@ -26,13 +26,21 @@ app.get("/", async (req, res)=>{
     const data = await fetch("http://localhost:3000/vol", {})
     const vols = await data.json() || []
     let reservations = []
+    reservationsId = []
+    const haveAccount = false
     
     if(req.cookies.userId){
-      
+        
         const id = req.cookies.userId
         
         const dataReservation = await fetch("http://localhost:3000/reservation/"+id, {})
+        
+      
         reservations = await dataReservation.json() 
+        reservations.forEach(element => {
+            reservationsId.push(element.volId)
+        });
+        console.log(reservationsId)
         
     }else{
         const dataId = await fetch("http://localhost:3000/user", {})
@@ -45,7 +53,7 @@ app.get("/", async (req, res)=>{
 
 
     res.status(200)
-    res.render(`index`, {name:"chris", vols, reservations})
+    res.render(`index`, {name:"chris", vols, reservations, reservationsId})
     
 })
 
@@ -59,7 +67,7 @@ app.post("/reserver", (req, res)=>{
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ volId, userId:req.cookies.userId })
+        body: JSON.stringify({ volId, userId:req.cookies.userId , haveAccount})
 
     })
     res.status(200)
