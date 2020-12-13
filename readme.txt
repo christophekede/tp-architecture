@@ -1,13 +1,14 @@
+Installation des dépendances:
 
-
-1/Installer les Dependancies:
-	Sur le terminal veuillez tapez les commandes suivantes afin d'installer les dépendances/modules nécessaires pour le fonctionneent de l'API:
-		*/npm init
-		*/npm i express ejs 
-		*/npm i --save-dev nodemon dotenv
-		*/ npm i passport passport-local express-session express-flash
-		*/npm i bcrypt
-		*/ npm i method-override
-		*/npm i sqlite3
-		*/npm run devStart
-		 
+Coté client:
+	Lancez un terminal et exéceutez les commandes suivantes:
+ 	1/ cd client
+	2/ npm i nodemon express
+	3/ npm i body-parser cookie-parser ejs node-fetch
+	4/ npm run start
+Coté serveur:
+	Lancez un nouveau terminal et exéceutez les commandes suivantes:
+	1/ cd server
+	2/ npm i nodemon express
+	3/ npm i sqlite3 
+	4/ npm run start
