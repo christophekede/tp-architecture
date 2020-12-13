@@ -100,7 +100,7 @@
 <body>
     <div class="container">
         <div class="box1">
-            <table>
+            <table id="vols">
                 <h1>Liste de vols disponible</h1>
                 <thead>
                     <tr>
@@ -113,7 +113,7 @@
                 </thead>
                 <tbody>
                     <% for(var i=0; i<vols.length; i++) { %>
-                        <tr>
+                        <tr id="vol<%= vols[i].volId %>">
                             <td>
                                 <%= vols[i].codeDepart %>
                             </td>
@@ -144,9 +144,9 @@
 
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="reservations">
                     <% for(var i=0; i<reservations.length; i++) { %>
-                        <tr>
+                        <tr id="reservation<%= reservations[i].volId %>">
                             <td>
                                 <%= reservations[i].codeDepart %>
                             </td>
@@ -168,7 +168,7 @@
     </div>
 </body>
 <script>
-    const reserver = (volId) => {
+    const reserver = async (volId) => {
         fetch("/reserver", {
             method: 'POST',
             headers: {
@@ -176,6 +176,38 @@
             },
             body: JSON.stringify({ volId })
         })
+
+        // supprimer vol de la liste des vols disponible
+        const volDelete = document.getElementById("vol" + volId)
+        volDelete.innerHTML = ""
+        console.log(volId)
+        fetch("http://localhost:3000/vol/" + volId, {}).then(data => data.json()).then(volInfo => {
+            console.log(volInfo)
+
+            const reservationToAdd = `<tr id="reservation${volInfo.volId}">
+                            <td>
+                                ${volInfo.codeDepart}
+                            </td>
+                            <td>
+                                ${volInfo.codeDestination}
+                            </td>
+                            <td>
+                                ${volInfo.prix}
+                            <td>
+                                <button onclick=annuler(${volInfo.volId})>Annuler</button>
+                            </td>
+                        </tr>`
+
+
+            const tr = document.createElement("tr")
+            tr.innerHTML = reservationToAdd
+            document.getElementById("reservations").appendChild(tr)
+        })
+
+
+
+
+
     }
     //annuler: 
 
