@@ -1,4 +1,3 @@
-
 const app = require("express")()
 const DB = require("../../core/DBcore")
 
@@ -23,14 +22,34 @@ app.get("/vol:id", (req, res)=>{
         
     })
    
+
+
   //console.log(req)
     
+})
+
+app.get("/vol/:volId", (req, res)=>{
+  const DBinstance = new DB()
+  const db = DBinstance.getDB()
+
+  const resData =  db.get("select * from vol where volId ="+req.params.volId
+  , (err, data)=>{
+     if(err)
+          return res.status(500).json({success:"ko"})
+      res.status(200)
+      res.json(data)
+      
+  })
+ 
+
+  
+//console.log(req)
+  
 })
 
 app.post("/vol", (req, res)=>{
     
 
 })
-
 
 module.exports = app

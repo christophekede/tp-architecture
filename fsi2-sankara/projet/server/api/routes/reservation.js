@@ -1,4 +1,3 @@
-
 const app = require("express")()
 const DB = require("../../core/DBcore")
 
@@ -98,4 +97,3 @@ app.post("/annulation", (req, res)=>{
 })
 
 module.exports = app
-

@@ -1,6 +1,25 @@
+
+
+
 # E1-DESIGN
 Objectif: réaliser une solution, ultra simplifié de reservation de billet d'avion
 
+Installation des dépendances:
+
+Coté client:
+	Lancez un terminal et exéceutez les commandes suivantes:
+ 	1/ cd client
+	2/ npm i nodemon express
+	3/ npm i body-parser cookie-parser ejs node-fetch
+	4/ npm run start
+Coté serveur:
+	Lancez un nouveau terminal et exéceutez les commandes suivantes:
+	1/ cd server
+	2/ npm i nodemon express
+	3/ npm i sqlite3 
+	4/ npm run start
+
+  
 ## Archictecture :
 <!-- ![SchemaArchi_FondBlanc_pour_md](https://user-images.githubusercontent.com/34629130/100863809-62f61d00-3495-11eb-82c7-05c1de93664b.png) -->
 Nous avons choisi une architecture client/serveur pour la réalisation de cette API. Le client et le serveur utilisent le même protocole de communication (HTTP).

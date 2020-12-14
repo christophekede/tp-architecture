@@ -21,8 +21,5 @@ CREATE TABLE Reservation (
 );
 
 INSERT INTO User (userId, name, password) VALUES (1, 'toto', '123456');
-
-INSERT INTO Vol (volId, codeDepart, codeDestination, prix) VALUES (2, 'JFK', 'CDG', 250);
-INSERT INTO Vol (volId, codeDepart, codeDestination, prix) VALUES (4, 'DTW', 'JFK', 155);
+INSERT INTO Vol (volId, codeDepart, codeDestination, prix) VALUES (1, 'CDG', 'JFK', 400);
 INSERT INTO Reservation (reservationId, userId, volId) VALUES (1, 1, 1);
-
