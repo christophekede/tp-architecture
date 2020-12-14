@@ -4,20 +4,23 @@
 # E1-DESIGN
 Objectif: réaliser une solution, ultra simplifié de reservation de billet d'avion
 
+Instructions
+Installation de node.js
 Installation des dépendances:
 
 Coté serveur:
-	Lancez un nouveau terminal et exéceutez les commandes suivantes:
-	* cd server
-	* npm install
-	* npm install nodemon -g
-	* npm run start
+Lancer un nouveau terminal et exécuter les commandes suivantes:
+
+* cd server
+* npm install
+* npm install nodemon -g
+* npm run start
 
 Coté client:
-	Lancez un terminal et exéceutez les commandes suivantes:
- 	* cd client
-	* npm install
-	* npm run start
+Lancer un terminal et exécuter les commandes suivantes:
+* cd client
+* npm install
+* npm run start
 
   
 ## Archictecture :
